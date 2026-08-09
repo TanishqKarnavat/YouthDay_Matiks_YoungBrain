@@ -41,27 +41,10 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
         >
           MATIKS
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          className="text-[10px] text-gray-500 font-mono max-w-[200px]"
-        >
-          A Matiks initiative — turning screen time into smart time
-        </motion.p>
       </div>
 
       {/* Hero Title */}
       <div className="flex-1 flex flex-col justify-center max-w-xs mx-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.15, duration: 0.4 }}
-          className="text-[10px] font-mono font-bold tracking-[0.25em] text-[#B1FA63] uppercase mb-3"
-        >
-          TURN SCREEN TIME INTO SMART TIME
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
