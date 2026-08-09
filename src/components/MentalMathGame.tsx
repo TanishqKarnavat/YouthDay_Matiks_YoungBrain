@@ -134,6 +134,18 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [feedback, inputVal, currentChain, chainIndex]);
 
+  // Auto-submit when user types a valid answer
+  const autoSubmittedRef = useRef(false);
+  useEffect(() => {
+    if (inputVal !== '' && inputVal !== '-' && feedback === null && currentChain && !autoSubmittedRef.current) {
+      autoSubmittedRef.current = true;
+      handleSubmit();
+    }
+    if (inputVal === '' || inputVal === '-') {
+      autoSubmittedRef.current = false;
+    }
+  }, [inputVal, feedback, currentChain]);
+
   if (!currentChain) return null;
 
   const liveAccuracy = displayStats.attempts > 0 ? Math.round((displayStats.correct / displayStats.attempts) * 100) : 100;
@@ -232,12 +244,6 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
             <Delete className="w-5 h-5" />
           </button>
         </div>
-        <button
-          onClick={handleSubmit}
-          className="w-full mt-2 py-4 bg-[#B1FA63] hover:bg-[#9EE555] text-black font-bold text-sm rounded-xl cursor-pointer uppercase"
-        >
-          Submit
-        </button>
       </div>
     </div>
   );
