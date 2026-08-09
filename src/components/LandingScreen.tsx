@@ -41,6 +41,14 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
         >
           WORLD YOUTH DAY
         </motion.div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="text-[10px] text-gray-500 font-mono max-w-[200px]"
+        >
+          A Matiks initiative — turning screen time into smart time
+        </motion.p>
       </div>
 
       {/* Hero Title */}

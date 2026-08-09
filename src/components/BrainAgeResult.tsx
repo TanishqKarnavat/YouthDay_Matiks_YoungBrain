@@ -282,8 +282,11 @@ export default function BrainAgeResult({ memoryStats, mathStats, mazeStats }: Br
           rel="noopener noreferrer"
           className="w-full max-w-[280px] text-center group"
         >
-          <p className="text-[11px] text-gray-400 font-semibold mb-2">
+          <p className="text-[11px] text-gray-400 font-semibold mb-1">
             Want to make your brain sharper?
+          </p>
+          <p className="text-[10px] text-gray-500 font-mono mb-2">
+            Matiks turns screen time into smart time.
           </p>
           <span className="text-xs font-black text-[#B1FA63] uppercase tracking-wider group-hover:underline">
             Explore Matiks →
