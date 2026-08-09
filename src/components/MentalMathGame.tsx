@@ -134,18 +134,6 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [feedback, inputVal, currentChain, chainIndex]);
 
-  // Auto-submit when user types a valid answer
-  const autoSubmittedRef = useRef(false);
-  useEffect(() => {
-    if (inputVal !== '' && inputVal !== '-' && feedback === null && currentChain && !autoSubmittedRef.current) {
-      autoSubmittedRef.current = true;
-      handleSubmit();
-    }
-    if (inputVal === '' || inputVal === '-') {
-      autoSubmittedRef.current = false;
-    }
-  }, [inputVal, feedback, currentChain]);
-
   if (!currentChain) return null;
 
   const liveAccuracy = displayStats.attempts > 0 ? Math.round((displayStats.correct / displayStats.attempts) * 100) : 100;
@@ -172,15 +160,15 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       </div>
 
       {/* Calculator tape */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-2 min-h-0">
         <motion.div
           key={currentChain.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`space-y-1 text-center ${isShake ? 'animate-shake' : ''}`}
+          className={`space-y-0.5 text-center ${isShake ? 'animate-shake' : ''}`}
         >
           {/* Start value */}
-          <div className="text-4xl font-bold text-white">{currentChain.startValue}</div>
+          <div className="text-3xl font-bold text-white">{currentChain.startValue}</div>
           {/* Operations */}
           {currentChain.operations.map((op, i) => (
             <motion.div
@@ -188,7 +176,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-3xl font-bold"
+              className="text-2xl font-bold"
             >
               <span className="text-gray-500 mr-1">{op.operator}</span>
               <span className="text-white">{op.value}</span>
@@ -198,10 +186,9 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       </div>
 
       {/* Input area */}
-      <div className="px-4 pb-2">
-        <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block text-center mb-2">TYPE OUT YOUR ANSWER</span>
+      <div className="px-4 pb-1.5">
         <div
-          className={`w-full h-14 rounded-xl border flex items-center justify-center text-xl font-bold transition-all duration-150 ${
+          className={`w-full h-11 rounded-xl border flex items-center justify-center text-lg font-bold transition-all duration-150 ${
             feedback === 'correct'
               ? 'border-[#B1FA63] text-[#B1FA63] bg-[#B1FA63]/10 animate-pop-in'
               : feedback === 'incorrect'
@@ -214,36 +201,42 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       </div>
 
       {/* Keypad */}
-      <div className="px-4 pb-4">
-        <div className="grid grid-cols-3 gap-2">
+      <div className="px-4 pb-3">
+        <div className="grid grid-cols-3 gap-1.5">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((num) => (
             <button
               key={num}
               onClick={() => handleKeyPress(num)}
-              className="py-4 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
+              className="py-2.5 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
             >
               {num}
             </button>
           ))}
           <button
             onClick={() => handleKeyPress('-')}
-            className="py-4 bg-[#111111] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer"
+            className="py-2.5 bg-[#111111] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer"
           >
             .
           </button>
           <button
             onClick={() => handleKeyPress('0')}
-            className="py-4 bg-[#111111] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer"
+            className="py-2.5 bg-[#111111] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer"
           >
             0
           </button>
           <button
             onClick={handleBackspace}
-            className="py-4 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
+            className="py-2.5 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
           >
-            <Delete className="w-5 h-5" />
+            <Delete className="w-4 h-4" />
           </button>
         </div>
+        <button
+          onClick={handleSubmit}
+          className="w-full mt-1.5 py-2.5 bg-[#B1FA63] hover:bg-[#9EE555] text-black font-bold text-sm rounded-xl cursor-pointer uppercase"
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
