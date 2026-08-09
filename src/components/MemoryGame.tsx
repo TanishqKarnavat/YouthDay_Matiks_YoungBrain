@@ -147,7 +147,7 @@ export default function MemoryGame({ timeLeft, onGameEnd }: MemoryGameProps) {
 
       {/* Feedback flash overlay */}
       {feedbackType === 'correct' && (
-        <div className="absolute inset-0 bg-[#B1FA63]/10 pointer-events-none animate-flash-green z-10" />
+        <div className="absolute inset-0 bg-[#00E5FF]/10 pointer-events-none animate-flash-green z-10" />
       )}
       {feedbackType === 'incorrect' && (
         <div className="absolute inset-0 bg-[#FF6666]/10 pointer-events-none animate-flash-red z-10" />
@@ -162,18 +162,18 @@ export default function MemoryGame({ timeLeft, onGameEnd }: MemoryGameProps) {
 
             let tileClass = 'bg-[#1A1A1A]';
             if (gameState === 'memorize' && isPatternHighlighted) {
-              tileClass = 'bg-[#B1FA63]';
+              tileClass = 'bg-[#00E5FF]';
             } else if (gameState === 'input') {
-              if (isSelected) tileClass = 'bg-[#B1FA63]/30 border border-[#B1FA63]';
+              if (isSelected) tileClass = 'bg-[#00E5FF]/30 border border-[#00E5FF]';
             } else if (gameState === 'feedback') {
               const inPattern = pattern.includes(idx);
               const inSelection = selectedTiles.includes(idx);
               if (feedbackType === 'correct' && inPattern) {
-                tileClass = 'bg-[#B1FA63]';
+                tileClass = 'bg-[#00E5FF]';
               } else if (feedbackType === 'incorrect') {
                 if (inSelection && !inPattern) tileClass = 'bg-[#FF6666]';
-                else if (inPattern && !inSelection) tileClass = 'bg-[#B1FA63]/40 border border-dashed border-[#B1FA63]';
-                else if (inPattern && inSelection) tileClass = 'bg-[#B1FA63]/60';
+                else if (inPattern && !inSelection) tileClass = 'bg-[#00E5FF]/40 border border-dashed border-[#00E5FF]';
+                else if (inPattern && inSelection) tileClass = 'bg-[#00E5FF]/60';
               }
             }
 

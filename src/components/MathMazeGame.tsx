@@ -224,7 +224,7 @@ export default function MathMazeGame({ timeLeft, onGameEnd }: MathMazeGameProps)
     <div className="flex-1 flex flex-col h-full bg-[#050505] text-white select-none relative">
       {/* Success flash overlay */}
       {feedback === 'success' && (
-        <div className="absolute inset-0 bg-[#B1FA63]/15 pointer-events-none animate-flash-green z-10" />
+        <div className="absolute inset-0 bg-[#FFD600]/15 pointer-events-none animate-flash-green z-10" />
       )}
 
       {/* Top bar */}
@@ -247,7 +247,7 @@ export default function MathMazeGame({ timeLeft, onGameEnd }: MathMazeGameProps)
       {/* Target Goal */}
       <div className="text-center py-2">
         <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">TARGET GOAL</span>
-        <div className="text-5xl font-black text-[#B1FA63] mt-1">{currentMaze.target}</div>
+        <div className="text-5xl font-black text-[#FFD600] mt-1">{currentMaze.target}</div>
       </div>
 
       {/* Grid with START/END labels */}
@@ -259,7 +259,7 @@ export default function MathMazeGame({ timeLeft, onGameEnd }: MathMazeGameProps)
           </div>
           {/* END label */}
           <div className="absolute -bottom-5 right-2 z-10">
-            <span className="text-[10px] font-mono font-bold text-[#B1FA63] bg-[#111111] px-2 py-0.5 rounded border border-[#B1FA63]/30">END</span>
+            <span className="text-[10px] font-mono font-bold text-[#FFD600] bg-[#111111] px-2 py-0.5 rounded border border-[#FFD600]/30">END</span>
           </div>
 
           <div
@@ -278,8 +278,8 @@ export default function MathMazeGame({ timeLeft, onGameEnd }: MathMazeGameProps)
                 let nodeClass = 'bg-[#1A1A1A] text-white border-[#333333]';
                 if (isInPath) {
                   nodeClass = isLastInPath
-                    ? 'bg-[#B1FA63] text-black border-[#B1FA63]'
-                    : 'bg-[#B1FA63]/80 text-black border-[#B1FA63]/80';
+                    ? 'bg-[#FFD600] text-black border-[#FFD600]'
+                    : 'bg-[#FFD600]/80 text-black border-[#FFD600]/80';
                 } else if (node.type === 'operator') {
                   nodeClass = 'bg-[#1A1A1A] text-white/80 border-[#333333]';
                 }
