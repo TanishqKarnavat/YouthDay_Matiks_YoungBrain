@@ -274,6 +274,21 @@ export default function BrainAgeResult({ memoryStats, mathStats, mazeStats }: Br
             category={category.name}
           />
         </div>
+
+        {/* Matiks CTA */}
+        <a
+          href="https://matiks.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full max-w-[280px] text-center group"
+        >
+          <p className="text-[11px] text-gray-400 font-semibold mb-2">
+            Want to make your brain sharper?
+          </p>
+          <span className="text-xs font-black text-[#B1FA63] uppercase tracking-wider group-hover:underline">
+            Explore Matiks →
+          </span>
+        </a>
       </div>
 
       {/* Powered By Footer */}
