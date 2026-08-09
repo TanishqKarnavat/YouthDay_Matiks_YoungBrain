@@ -47,7 +47,7 @@ export default function ShareCard({ brainAge, category, description, scores, onC
       ctx.fillStyle = '#B1FA63';
       ctx.font = '600 36px system-ui, -apple-system, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('WORLD YOUTH DAY', canvas.width / 2, 190);
+      ctx.fillText('MATIKS', canvas.width / 2, 190);
 
       ctx.fillStyle = '#FFFFFF';
       ctx.font = '800 64px system-ui, -apple-system, sans-serif';

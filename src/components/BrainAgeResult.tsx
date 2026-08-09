@@ -107,9 +107,6 @@ export default function BrainAgeResult({ memoryStats, mathStats, mazeStats }: Br
       {/* Top Title */}
       <div className="text-center pt-2 mb-4 flex flex-col items-center gap-2">
         <img src="/matiks-logo.png" alt="Matiks" className="w-14 h-7" />
-        <span className="text-[10px] font-black tracking-[0.3em] text-[#B1FA63] uppercase block">
-          WORLD YOUTH DAY
-        </span>
         <h1 className="text-sm font-black tracking-wider uppercase text-white">
           HOW YOUNG IS YOUR BRAIN?
         </h1>
@@ -298,7 +295,7 @@ export default function BrainAgeResult({ memoryStats, mathStats, mazeStats }: Br
       <div className="text-center pt-4 pb-2 border-t border-gray-800/40 flex flex-col items-center gap-1">
         <img src="/matiks-logo.png" alt="Matiks" className="w-10 h-5" />
         <span className="text-[9px] font-black text-[#B1FA63] uppercase tracking-[0.2em] block">
-          WORLD YOUTH DAY 2026
+          MATIKS
         </span>
       </div>
     </div>

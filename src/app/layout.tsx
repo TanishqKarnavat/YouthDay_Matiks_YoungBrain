@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HOW YOUNG IS YOUR BRAIN? | Matiks × World Youth Day",
+  title: "HOW YOUNG IS YOUR BRAIN? | Matiks",
   description: "Take the 60-second cognitive speed showdown and determine your Matiks Brain Age! #MatiksBrainAge",
 };
 

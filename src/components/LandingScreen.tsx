@@ -39,7 +39,7 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
           transition={{ duration: 0.4 }}
           className="text-[10px] font-black tracking-[0.3em] text-[#B1FA63] uppercase"
         >
-          WORLD YOUTH DAY
+          MATIKS
         </motion.div>
         <motion.p
           initial={{ opacity: 0 }}
