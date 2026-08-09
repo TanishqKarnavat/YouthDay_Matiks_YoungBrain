@@ -116,6 +116,22 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
     }
   };
 
+  // Debounced auto-submit: waits 400ms after last keystroke
+  const autoSubmitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
+
+    if (inputVal !== '' && inputVal !== '-' && feedback === null && currentChain) {
+      autoSubmitTimerRef.current = setTimeout(() => {
+        handleSubmit();
+      }, 400);
+    }
+
+    return () => {
+      if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
+    };
+  }, [inputVal, feedback, currentChain]);
+
   // Physical keyboard support
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -200,7 +216,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
         </div>
       </div>
 
-      {/* Keypad + Submit */}
+      {/* Keypad */}
       <div className="px-4 pb-3">
         <div className="grid grid-cols-3 gap-1.5">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((num) => (
@@ -231,12 +247,6 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
             <Delete className="w-4 h-4" />
           </button>
         </div>
-        <button
-          onClick={handleSubmit}
-          className="w-full mt-1 py-2.5 bg-[#B1FA63] hover:bg-[#9EE555] text-black font-bold text-xs rounded-xl cursor-pointer uppercase"
-        >
-          Submit
-        </button>
       </div>
     </div>
   );
