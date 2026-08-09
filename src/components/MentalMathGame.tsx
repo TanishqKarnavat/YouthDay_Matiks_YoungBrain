@@ -143,7 +143,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
   return (
     <div className="flex-1 flex flex-col h-full bg-[#050505] text-white select-none">
       {/* Top bar */}
-      <div className="flex items-center justify-between px-4 pt-3 pb-2">
+      <div className="flex items-center justify-between px-4 pt-2 pb-1">
         <div>
           <span className="text-[10px] font-mono tracking-widest text-[#B1FA63] uppercase block">ROUND 2</span>
           <h2 className="text-lg font-black text-white tracking-tight uppercase">MENTAL MATH</h2>
@@ -160,15 +160,15 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       </div>
 
       {/* Calculator tape */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-2 min-h-0">
+      <div className="flex flex-col items-center justify-center px-4 py-1">
         <motion.div
           key={currentChain.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`space-y-0.5 text-center ${isShake ? 'animate-shake' : ''}`}
+          className={`space-y-0 text-center ${isShake ? 'animate-shake' : ''}`}
         >
           {/* Start value */}
-          <div className="text-3xl font-bold text-white">{currentChain.startValue}</div>
+          <div className="text-2xl font-bold text-white">{currentChain.startValue}</div>
           {/* Operations */}
           {currentChain.operations.map((op, i) => (
             <motion.div
@@ -176,7 +176,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-2xl font-bold"
+              className="text-xl font-bold"
             >
               <span className="text-gray-500 mr-1">{op.operator}</span>
               <span className="text-white">{op.value}</span>
@@ -186,9 +186,9 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       </div>
 
       {/* Input area */}
-      <div className="px-4 pb-1.5">
+      <div className="px-4 pb-1">
         <div
-          className={`w-full h-11 rounded-xl border flex items-center justify-center text-lg font-bold transition-all duration-150 ${
+          className={`w-full h-10 rounded-xl border flex items-center justify-center text-base font-bold transition-all duration-150 ${
             feedback === 'correct'
               ? 'border-[#B1FA63] text-[#B1FA63] bg-[#B1FA63]/10 animate-pop-in'
               : feedback === 'incorrect'
@@ -200,40 +200,40 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
         </div>
       </div>
 
-      {/* Keypad */}
+      {/* Keypad + Submit */}
       <div className="px-4 pb-3">
         <div className="grid grid-cols-3 gap-1.5">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((num) => (
             <button
               key={num}
               onClick={() => handleKeyPress(num)}
-              className="py-2.5 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
+              className="py-2 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-base rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
             >
               {num}
             </button>
           ))}
           <button
             onClick={() => handleKeyPress('-')}
-            className="py-2.5 bg-[#111111] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer"
+            className="py-2 bg-[#111111] text-white font-bold text-base rounded-xl border border-gray-700/40 cursor-pointer"
           >
             .
           </button>
           <button
             onClick={() => handleKeyPress('0')}
-            className="py-2.5 bg-[#111111] text-white font-bold text-lg rounded-xl border border-gray-700/40 cursor-pointer"
+            className="py-2 bg-[#111111] text-white font-bold text-base rounded-xl border border-gray-700/40 cursor-pointer"
           >
             0
           </button>
           <button
             onClick={handleBackspace}
-            className="py-2.5 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
+            className="py-2 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
           >
             <Delete className="w-4 h-4" />
           </button>
         </div>
         <button
           onClick={handleSubmit}
-          className="w-full mt-1.5 py-2.5 bg-[#B1FA63] hover:bg-[#9EE555] text-black font-bold text-sm rounded-xl cursor-pointer uppercase"
+          className="w-full mt-1 py-2.5 bg-[#B1FA63] hover:bg-[#9EE555] text-black font-bold text-xs rounded-xl cursor-pointer uppercase"
         >
           Submit
         </button>
