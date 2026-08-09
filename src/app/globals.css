@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #F5F5F7;
+  --color-dark-bg: #050505;
+  --color-dark-surface: #111111;
+  --color-memory-cyan: #B1FA63;
+  --color-math-blue: #8BD44A;
+  --color-maze-green: #6BC93A;
+  --color-path-yellow: #B1FA63;
+  --color-brand-green: #B1FA63;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-dark-bg: var(--color-dark-bg);
+  --color-dark-surface: var(--color-dark-surface);
+  --color-memory-cyan: var(--color-memory-cyan);
+  --color-math-blue: var(--color-math-blue);
+  --color-maze-green: var(--color-maze-green);
+  --color-path-yellow: var(--color-path-yellow);
+  --color-brand-green: var(--color-brand-green);
+  
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+/* Custom transitions and game-specific interactive effects */
+.game-container {
+  height: 100dvh;
+  max-height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(177, 250, 99, 0.4); }
+  50% { box-shadow: 0 0 20px 4px rgba(177, 250, 99, 0.6); }
+}
+
+.animate-pulse-cyan {
+  animation: pulse-cyan 1.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(177, 250, 99, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(177, 250, 99, 0.7), 0 0 60px rgba(177, 250, 99, 0.3); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes flash-green {
+  0% { background-color: rgba(0, 230, 118, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.animate-flash-green {
+  animation: flash-green 0.4s ease-out;
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(255, 100, 100, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.animate-flash-red {
+  animation: flash-red 0.4s ease-out;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.3s ease-out;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
