@@ -48,10 +48,10 @@ export default function CalculatingScreen({ onComplete }: CalculatingScreenProps
   }, []);
 
   return (
-    <div className="flex-1 flex flex-col justify-between p-6 text-center select-none game-container bg-[#050505] text-[#F5F5F7]">
+    <div className="flex-1 flex flex-col justify-between p-6 text-center select-none bg-[#050505] text-[#F5F5F7]">
       <div className="pt-8 flex flex-col items-center gap-2">
-        <img src="/matiks-logo.png" alt="Matiks" className="w-12 h-6" />
-        <span className="text-[10px] font-black tracking-[0.3em] text-[#B1FA63] uppercase">
+        <img src="/matiks-logo.svg" alt="Matiks" className="w-14 h-auto" />
+        <span className="text-[10px] font-display tracking-[0.3em] text-[#B1FA63] uppercase">
           SHOWDOWN COMPLETE
         </span>
       </div>
@@ -62,7 +62,7 @@ export default function CalculatingScreen({ onComplete }: CalculatingScreenProps
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="relative w-40 h-40 flex items-center justify-center border-4 border-dashed border-[#B1FA63]/20 rounded-full mb-6"
+          className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center border-4 border-dashed border-[#B1FA63]/20 rounded-full mb-6"
         >
           <motion.div
             animate={{ rotate: 360 }}

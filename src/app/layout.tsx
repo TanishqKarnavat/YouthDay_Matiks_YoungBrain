@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   description: "Take the 60-second cognitive speed showdown and determine your Matiks Brain Age! #MatiksBrainAge",
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+  themeColor: '#050505',
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html

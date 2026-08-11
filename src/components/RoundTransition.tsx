@@ -20,7 +20,7 @@ export default function RoundTransition({ roundName, subtitle, colorClass, onCom
   }, [onComplete]);
 
   return (
-    <div className="flex-1 flex flex-col justify-center items-center p-6 text-center select-none game-container bg-[#050505] text-[#F5F5F7]">
+    <div className="flex-1 flex flex-col justify-center items-center p-6 text-center select-none bg-[#050505] text-[#F5F5F7]">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -28,11 +28,11 @@ export default function RoundTransition({ roundName, subtitle, colorClass, onCom
         transition={{ duration: 0.3, type: 'spring', stiffness: 150 }}
         className="space-y-4 max-w-xs"
       >
-        <div className="text-[10px] font-black tracking-[0.3em] uppercase text-[#B1FA63]">
+        <div className="text-[10px] font-display tracking-[0.3em] uppercase text-[#B1FA63]">
           ROUND COMPLETE
         </div>
         
-        <h2 className="text-3xl font-extrabold tracking-tight uppercase leading-none text-white">
+        <h2 className="text-3xl font-display tracking-tight uppercase leading-none text-white">
           {roundName}
         </h2>
         

@@ -8,16 +8,16 @@ import { Share2, Download, Trophy, Check } from 'lucide-react';
 interface ShareButtonsProps {
   cardDataUrl: string | null;
   brainAge: number;
-  category: string;
+  message: string;
 }
 
-export default function ShareButtons({ cardDataUrl, brainAge, category }: ShareButtonsProps) {
+export default function ShareButtons({ cardDataUrl, brainAge, message }: ShareButtonsProps) {
   const { trackEvent } = useAnalytics();
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const shareText = `🧠 My brain age is ${brainAge}! I'm ${category}. Think you're faster? Prove it. #MatiksBrainAge`;
   const shareUrl = typeof window !== 'undefined' ? window.location.origin : 'https://brainage.matiks.com';
+  const shareText = `🧠 My brain age is ${brainAge}.\n${message}\n\nThink your brain is younger?\n${shareUrl}`;
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -95,7 +95,7 @@ export default function ShareButtons({ cardDataUrl, brainAge, category }: ShareB
 
   const handleChallengeFriend = () => {
     trackEvent('challenge_clicked');
-    const text = `🧠 I challenge you! My brain age is ${brainAge} (${category}). Can you beat me? #MatiksBrainAge Play here: ${shareUrl}`;
+    const text = `🧠 I challenge you! My brain age is ${brainAge}. ${message} Can you beat me? Play here: ${shareUrl}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     triggerToast('Challenge copied! Send to a friend.');

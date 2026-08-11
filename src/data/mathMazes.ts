@@ -76,6 +76,25 @@ function computeMazePath(grid: MazeNode[][], path: [number, number][]): number {
   return val;
 }
 
+function computeMazePathWithCheck(grid: MazeNode[][], path: [number, number][]): { result: number; valid: boolean } {
+  if (path.length === 0) return { result: 0, valid: false };
+  let val = parseInt(grid[path[0][0]][path[0][1]].value);
+  for (let i = 1; i < path.length; i += 2) {
+    const opCoord = path[i];
+    if (!opCoord) break;
+    const op = grid[opCoord[0]][opCoord[1]].value;
+    const numCoord = path[i + 1];
+    if (!numCoord) break;
+    const num = parseInt(grid[numCoord[0]][numCoord[1]].value);
+    if (op === '+') val += num;
+    else if (op === '-') val -= num;
+    else if (op === '×') val *= num;
+    else if (op === '÷' && num !== 0) val = Math.floor(val / num);
+    if (val < 0) return { result: val, valid: false };
+  }
+  return { result: val, valid: true };
+}
+
 export function generateRandomMaze(difficulty: 'easy' | 'medium' | 'hard'): MathMaze {
   for (let attempt = 0; attempt < 10; attempt++) {
     const result = tryGenerateMaze(difficulty);
@@ -152,8 +171,8 @@ function tryGenerateMaze(difficulty: 'easy' | 'medium' | 'hard'): MathMaze | nul
     }
   }
 
-  const target = computeMazePath(grid, path);
-  if (target < -50 || target > 100 || isNaN(target)) return null;
+  const { result: target, valid } = computeMazePathWithCheck(grid, path);
+  if (!valid || target < 0 || target > 100 || isNaN(target)) return null;
 
   return {
     id: `dyn_maze_${Date.now()}_${Math.floor(Math.random() * 1000)}`,

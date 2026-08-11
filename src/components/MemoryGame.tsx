@@ -129,7 +129,7 @@ export default function MemoryGame({ timeLeft, onGameEnd }: MemoryGameProps) {
       <div className="flex items-center justify-between px-4 pt-3 pb-2">
         <div>
           <span className="text-[10px] font-mono tracking-widest text-[#B1FA63] uppercase block">ROUND 1</span>
-          <h2 className="text-lg font-black text-white tracking-tight uppercase">MEMORY</h2>
+          <h2 className="text-lg font-display text-white tracking-tight uppercase">MEMORY</h2>
         </div>
         <div className="flex items-center gap-1.5 bg-[#111111] px-3 py-1.5 rounded-full">
           <div className={`w-2 h-2 rounded-full ${timerColor} animate-pulse`} />
@@ -146,16 +146,13 @@ export default function MemoryGame({ timeLeft, onGameEnd }: MemoryGameProps) {
       </div>
 
       {/* Feedback flash overlay */}
-      {feedbackType === 'correct' && (
-        <div className="absolute inset-0 bg-[#00E5FF]/10 pointer-events-none animate-flash-green z-10" />
-      )}
       {feedbackType === 'incorrect' && (
         <div className="absolute inset-0 bg-[#FF6666]/10 pointer-events-none animate-flash-red z-10" />
       )}
 
       {/* Grid */}
       <div className="flex-1 flex items-center justify-center px-4">
-        <div className={`grid gap-2 w-full max-w-[360px] aspect-square`} style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))` }}>
+        <div key={levelIndex} className={`grid gap-2 w-full max-w-[360px] aspect-square`} style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))` }}>
           {Array.from({ length: totalTiles }).map((_, idx) => {
             const isPatternHighlighted = pattern.includes(idx);
             const isSelected = selectedTiles.includes(idx);
@@ -169,7 +166,7 @@ export default function MemoryGame({ timeLeft, onGameEnd }: MemoryGameProps) {
               const inPattern = pattern.includes(idx);
               const inSelection = selectedTiles.includes(idx);
               if (feedbackType === 'correct' && inPattern) {
-                tileClass = 'bg-[#00E5FF]';
+                tileClass = 'bg-[#B1FA63]/40';
               } else if (feedbackType === 'incorrect') {
                 if (inSelection && !inPattern) tileClass = 'bg-[#FF6666]';
                 else if (inPattern && !inSelection) tileClass = 'bg-[#00E5FF]/40 border border-dashed border-[#00E5FF]';

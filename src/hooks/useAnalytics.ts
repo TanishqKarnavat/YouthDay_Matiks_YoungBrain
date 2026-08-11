@@ -9,6 +9,8 @@ export type AnalyticsEvent =
   | 'math_completed'
   | 'maze_started'
   | 'maze_completed'
+  | 'remember_reason_started'
+  | 'remember_reason_completed'
   | 'test_completed'
   | 'result_viewed'
   | 'result_shared'

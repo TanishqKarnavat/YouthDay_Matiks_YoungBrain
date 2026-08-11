@@ -68,15 +68,8 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
 
   const handleKeyPress = (char: string) => {
     if (feedback !== null) return;
-    if (char === '-') {
-      setInputVal((prev) => {
-        if (prev.startsWith('-')) return prev.slice(1);
-        return '-' + prev;
-      });
-    } else {
-      if (inputVal.replace('-', '').length >= 4) return;
-      setInputVal((prev) => prev + char);
-    }
+    if (inputVal.replace('-', '').length >= 4) return;
+    setInputVal((prev) => prev + char);
   };
 
   const handleBackspace = () => {
@@ -85,7 +78,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
   };
 
   const handleSubmit = () => {
-    if (!currentChain || inputVal === '' || inputVal === '-' || feedback !== null) return;
+    if (!currentChain || inputVal === '' || feedback !== null) return;
     const numericAnswer = parseInt(inputVal);
     const isCorrect = numericAnswer === currentChain.answer;
     statsRef.current.attempts += 1;
@@ -116,21 +109,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
     }
   };
 
-  // Debounced auto-submit: waits 400ms after last keystroke
-  const autoSubmitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => {
-    if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
-
-    if (inputVal !== '' && inputVal !== '-' && feedback === null && currentChain) {
-      autoSubmitTimerRef.current = setTimeout(() => {
-        handleSubmit();
-      }, 400);
-    }
-
-    return () => {
-      if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
-    };
-  }, [inputVal, feedback, currentChain]);
+  // Submit on Enter only — no auto-submit
 
   // Physical keyboard support
   useEffect(() => {
@@ -138,8 +117,6 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       if (feedback !== null) return;
       if (e.key >= '0' && e.key <= '9') {
         handleKeyPress(e.key);
-      } else if (e.key === '-') {
-        handleKeyPress('-');
       } else if (e.key === 'Backspace') {
         handleBackspace();
       } else if (e.key === 'Enter') {
@@ -162,7 +139,7 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
       <div className="flex items-center justify-between px-4 pt-2 pb-1">
         <div>
           <span className="text-[10px] font-mono tracking-widest text-[#B1FA63] uppercase block">ROUND 2</span>
-          <h2 className="text-lg font-black text-white tracking-tight uppercase">MENTAL MATH</h2>
+          <h2 className="text-lg font-display text-white tracking-tight uppercase">MENTAL MATH</h2>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs font-mono text-[#B1FA63]">{liveAccuracy}%</span>
@@ -181,23 +158,31 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
           key={currentChain.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`space-y-1 text-center ${isShake ? 'animate-shake' : ''}`}
+          className={`text-center ${isShake ? 'animate-shake' : ''}`}
         >
-          {/* Start value */}
-          <div className="text-5xl font-bold text-white">{currentChain.startValue}</div>
-          {/* Operations */}
-          {currentChain.operations.map((op, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="text-4xl font-bold"
-            >
-              <span className="text-gray-500 mr-1">{op.operator}</span>
-              <span className="text-white">{op.value}</span>
-            </motion.div>
-          ))}
+          {currentChain.operations.length === 1 && (currentChain.operations[0].operator === '×' || currentChain.operations[0].operator === '÷') ? (
+            <div className="text-5xl font-bold text-white flex items-center gap-3">
+              <span>{currentChain.startValue}</span>
+              <span className="text-[#B1FA63]">{currentChain.operations[0].operator}</span>
+              <span>{currentChain.operations[0].value}</span>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              <div className="text-5xl font-bold text-white">{currentChain.startValue}</div>
+              {currentChain.operations.map((op, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-4xl font-bold"
+                >
+                  <span className="text-gray-500 mr-1">{op.operator}</span>
+                  <span className="text-white">{op.value}</span>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
 
@@ -223,30 +208,37 @@ export default function MentalMathGame({ timeLeft, onGameEnd }: MentalMathGamePr
             <button
               key={num}
               onClick={() => handleKeyPress(num)}
-              className="py-4 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
+              className="py-3.5 bg-[#111111] hover:bg-[#1A1A1A] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer active:bg-gray-700"
             >
               {num}
             </button>
           ))}
           <button
-            onClick={() => handleKeyPress('-')}
-            className="py-4 bg-[#111111] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer"
+            onClick={handleBackspace}
+            className="py-3.5 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
           >
-            .
+            <Delete className="w-5 h-5" />
           </button>
           <button
             onClick={() => handleKeyPress('0')}
-            className="py-4 bg-[#111111] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer"
+            className="py-3.5 bg-[#111111] text-white font-bold text-xl rounded-xl border border-gray-700/40 cursor-pointer"
           >
             0
           </button>
           <button
-            onClick={handleBackspace}
-            className="py-4 bg-[#111111] text-gray-400 rounded-xl border border-gray-700/40 flex items-center justify-center cursor-pointer"
+            disabled
+            className="py-3.5 bg-transparent border border-transparent text-transparent cursor-default"
           >
-            <Delete className="w-5 h-5" />
+            .
           </button>
         </div>
+        <button
+          onClick={handleSubmit}
+          disabled={inputVal === '' || inputVal === '-' || feedback !== null}
+          className="w-full mt-2 py-3.5 bg-[#B1FA63] hover:bg-[#9EE555] disabled:bg-gray-700 disabled:text-gray-500 text-black font-black text-sm tracking-widest uppercase rounded-xl transition-all cursor-pointer disabled:cursor-not-allowed"
+        >
+          SUBMIT
+        </button>
       </div>
     </div>
   );

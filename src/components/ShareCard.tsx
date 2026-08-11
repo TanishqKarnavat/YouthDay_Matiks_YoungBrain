@@ -9,8 +9,9 @@ interface ShareCardProps {
   description: string;
   scores: {
     memory: number;
-    math: number;
-    maze: number;
+    reasoning: number;
+    zip: number;
+    patches: number;
   };
   onCardGenerated?: (dataUrl: string) => void;
 }
@@ -53,13 +54,9 @@ export default function ShareCard({ brainAge, category, description, scores, onC
       ctx.font = '800 64px system-ui, -apple-system, sans-serif';
       ctx.fillText('HOW YOUNG IS YOUR BRAIN?', canvas.width / 2, 290);
 
-      // 4. Draw Brain Icon Emoji
-      ctx.font = '160px Apple Color Emoji, Segoe UI Emoji, system-ui';
-      ctx.fillText('🧠', canvas.width / 2, 490);
-
-      // 5. Draw Brain Age Circle Badge
+      // 4. Draw Brain Age Circle Badge
       const badgeX = canvas.width / 2;
-      const badgeY = 760;
+      const badgeY = 520;
       const badgeRadius = 180;
 
       ctx.fillStyle = '#111111';
@@ -81,12 +78,12 @@ export default function ShareCard({ brainAge, category, description, scores, onC
       ctx.font = '500 28px system-ui, -apple-system, sans-serif';
       ctx.fillText('BRAIN AGE', badgeX, badgeY + 85);
 
-      // 6. Category Title
+      // 5. Category Title
       ctx.fillStyle = '#B1FA63';
       ctx.font = '800 60px system-ui, -apple-system, sans-serif';
-      ctx.fillText(category.toUpperCase(), canvas.width / 2, 1070);
+      ctx.fillText(category.toUpperCase(), canvas.width / 2, 800);
 
-      // 7. Description
+      // 6. Description
       ctx.fillStyle = '#CCCCCC';
       ctx.font = '400 36px system-ui, -apple-system, sans-serif';
       
@@ -102,16 +99,16 @@ export default function ShareCard({ brainAge, category, description, scores, onC
         }
         index++;
       }
-      ctx.fillText(line1.trim(), canvas.width / 2, 1160);
+      ctx.fillText(line1.trim(), canvas.width / 2, 890);
       if (line2 !== '') {
-        ctx.fillText(line2.trim(), canvas.width / 2, 1210);
+        ctx.fillText(line2.trim(), canvas.width / 2, 940);
       }
 
-      // 8. Draw Metrics Box
+      // 7. Draw Metrics Box
       const boxX = 140;
-      const boxY = line2 !== '' ? 1290 : 1250;
+      const boxY = line2 !== '' ? 1020 : 980;
       const boxW = 800;
-      const boxH = 360;
+      const boxH = 460;
       
       ctx.fillStyle = '#111111';
       ctx.beginPath();
@@ -122,18 +119,12 @@ export default function ShareCard({ brainAge, category, description, scores, onC
       ctx.font = '600 26px system-ui, -apple-system, sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText('COGNITIVE DIMENSION', boxX + 50, boxY + 60);
-      ctx.textAlign = 'right';
-      ctx.fillText('ACCURACY', boxX + boxW - 50, boxY + 60);
 
       const drawProgressBar = (label: string, score: number, yOffset: number, color: string) => {
         ctx.fillStyle = '#FFFFFF';
         ctx.font = '600 30px system-ui, -apple-system, sans-serif';
         ctx.textAlign = 'left';
         ctx.fillText(label, boxX + 50, boxY + yOffset);
-
-        ctx.fillStyle = color;
-        ctx.textAlign = 'right';
-        ctx.fillText(`${score}%`, boxX + boxW - 50, boxY + yOffset);
 
         ctx.fillStyle = '#1A1A1A';
         ctx.beginPath();
@@ -147,10 +138,11 @@ export default function ShareCard({ brainAge, category, description, scores, onC
       };
 
       drawProgressBar('MEMORY', scores.memory, 140, '#B1FA63');
-      drawProgressBar('MENTAL MATH', scores.math, 240, '#8BD44A');
-      drawProgressBar('MATH MAZE', scores.maze, 340, '#6BC93A');
+      drawProgressBar('REASONING', scores.reasoning, 230, '#B1FA63');
+      drawProgressBar('ZIP', scores.zip, 320, '#B1FA63');
+      drawProgressBar('PATCHES', scores.patches, 410, '#B1FA63');
 
-      // 9. CTA Footer
+      // 8. CTA Footer
       ctx.fillStyle = '#B1FA63';
       ctx.font = '700 42px system-ui, -apple-system, sans-serif';
       ctx.textAlign = 'center';
@@ -168,7 +160,7 @@ export default function ShareCard({ brainAge, category, description, scores, onC
         onCardGenerated(dataUrl);
       }
     };
-    logoImg.src = '/matiks-logo.png';
+    logoImg.src = '/matiks-logo.svg';
   }, [brainAge, category, description, scores, onCardGenerated]);
 
   return (

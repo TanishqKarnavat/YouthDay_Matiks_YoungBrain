@@ -231,7 +231,7 @@ export default function MathMazeGame({ timeLeft, onGameEnd }: MathMazeGameProps)
       <div className="flex items-center justify-between px-4 pt-3 pb-2">
         <div>
           <span className="text-[10px] font-mono tracking-widest text-[#B1FA63] uppercase block">ROUND 3</span>
-          <h2 className="text-lg font-black text-white tracking-tight uppercase">MATH MAZE</h2>
+          <h2 className="text-lg font-display text-white tracking-tight uppercase">MATH MAZE</h2>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs font-mono text-[#B1FA63]">{liveAccuracy}%</span>

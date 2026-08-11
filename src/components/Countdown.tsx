@@ -33,7 +33,7 @@ export default function Countdown({ onComplete }: CountdownProps) {
   const isNumber = !isNaN(Number(currentText));
 
   return (
-    <div className="flex-1 flex items-center justify-center game-container bg-[#050505] text-[#F5F5F7]">
+    <div className="flex-1 flex items-center justify-center bg-[#050505] text-[#F5F5F7]">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -47,13 +47,13 @@ export default function Countdown({ onComplete }: CountdownProps) {
           className="select-none font-extrabold text-center"
         >
           {isNumber ? (
-            <span className="text-[120px] leading-none text-white tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <span className="text-[20vw] sm:text-[120px] leading-none text-white tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
               {currentText}
             </span>
           ) : (
-            <span className={`text-4xl md:text-5xl font-black uppercase tracking-widest ${
+            <span className={`text-4xl sm:text-5xl md:text-5xl font-display uppercase tracking-widest ${
               currentText === 'GO!' 
-                ? 'text-[#B1FA63] text-[80px]' 
+                ? 'text-[#B1FA63] text-[14vw] sm:text-[80px]' 
                 : 'text-white'
             }`}>
               {currentText}
